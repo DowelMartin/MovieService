@@ -5,67 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">Movies</h1>
 
-@*@if (User.IsInRole("Admin"))
-{*@
     <p>
-        <a class="btn btn-outline-secondary" asp-action="Create">Add movie</a>
+        <a class="btn btn-outline-warning btn-lg btn-block" asp-action="Create">Add movie</a>
     </p>
-@*}*@
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductionCountries)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Thumbnail)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<hr />
+<div class="row">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductionCountries)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
-            </td>
-            <td>
-                <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-                <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@item.ID">Comment</a>
-            </td>
-        </tr>
+
+    
+    <div class="card" style="width: 18rem; margin-right: 10px; margin-top: 10px;">
+        <a asp-action="Details" asp-route-id="@item.ID" style="text-decoration: none; color: black;">
+            <img src="@Url.Content(item.Thumbnail)" class="card-img-top" height="367px">
+            <div class="card-body text-center">
+                <h4 class="link">@Html.DisplayFor(modelItem => item.Name)</h4>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
+            </div>
+        </a>
+    </div>
+
+
 }
-    </tbody>
-</table>
+</div>

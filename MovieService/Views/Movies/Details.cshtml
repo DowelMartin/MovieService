@@ -1,15 +1,39 @@
 ﻿@model MovieService.Models.Movie
 
+@using Microsoft.AspNetCore.Identity
+@using MovieService.Areas.Identity.Data
+
+@inject SignInManager<MovieServiceUser> SignInManager
+@inject UserManager<MovieServiceUser> UserManager
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Details</h1>
-
 <div>
     <h4>Movie</h4>
-    <div class="card mb-3" style="max-width: 1000px;">
+    <hr />
+    <div class="text-center">
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+        }
+
+        @if (SignInManager.IsSignedIn(User)) 
+        { 
+            <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@Model.ID">Comment</a>
+        }
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>
+        }
+    </div>
+    <hr />
+    <div class="card mb-3" style="max-width: 1000px; margin-top: 10px;">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="@Url.Content(Model.Thumbnail)" class="img-fluid rounded-start" alt="...">
@@ -49,8 +73,4 @@
         </div>
     </div>
 
-</div>
-<div>
-    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
 </div>
