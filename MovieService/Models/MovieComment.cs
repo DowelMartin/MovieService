@@ -10,6 +10,7 @@ namespace MovieService.Models
     {
         [Key]
         public int ID { get; set; }
+        [MaxLength(500)]
         public string Comments { get; set; }
         public DateTime PublishedDate { get; set; }
         public int MoviesID { get; set; }
