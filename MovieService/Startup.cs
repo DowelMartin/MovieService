@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MovieService.Areas.Identity.Data;
 using MovieService.Data;
+using MovieService.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,10 @@ namespace MovieService
         {
             services.AddDbContext<MovieServiceContext>(options => options.UseSqlite(Configuration.GetConnectionString("MovieServiceContextConnection")));
             services.AddDefaultIdentity<MovieServiceUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<MovieServiceContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<MovieServiceContext>()
+                .AddDefaultTokenProviders();
+            services.AddScoped<IWatchlistRepository, WatchlistRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

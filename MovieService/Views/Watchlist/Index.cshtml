@@ -1,0 +1,32 @@
+﻿@model List<Watchlist>
+
+
+<h2>My Watchlists</h2>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Movie Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var watchlist in Model)
+            {
+                <tr>
+                    <td>
+                        @watchlist.ID
+                    </td>
+                    <td>
+                        @watchlist.Movie.Name
+                    </td>
+                    <td>
+                        <a asp-action="Remove" asp-controller="Watchlist" asp-route-id="@watchlist.ID">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
