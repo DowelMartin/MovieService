@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MovieService.Areas.Identity.Data;
+using MovieService.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,9 @@ namespace MovieService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MovieServiceContext>(options => options.UseSqlite(Configuration.GetConnectionString("MovieServiceContextConnection")));
+            services.AddDefaultIdentity<MovieServiceUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<MovieServiceContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

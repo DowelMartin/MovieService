@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MovieService.Areas.Identity.Data;
+using MovieService.Models;
 
 namespace MovieService.Data
 {
@@ -15,6 +16,8 @@ namespace MovieService.Data
             : base(options)
         {
         }
+
+        public DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

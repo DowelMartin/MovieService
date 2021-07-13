@@ -16,12 +16,6 @@ namespace MovieService.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<MovieServiceContext>(options =>
-                    options.UseSqlite(
-                        context.Configuration.GetConnectionString("MovieServiceContextConnection")));
-
-                services.AddDefaultIdentity<MovieServiceUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<MovieServiceContext>();
             });
         }
     }
