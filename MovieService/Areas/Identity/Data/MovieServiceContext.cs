@@ -18,6 +18,7 @@ namespace MovieService.Data
         }
 
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieComment> MovieComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

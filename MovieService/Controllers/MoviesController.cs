@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieService.Data;
 using MovieService.Models;
+using MovieService.ViewModels;
 
 namespace MovieService.Controllers
 {
@@ -26,21 +27,40 @@ namespace MovieService.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.ID == id);
+            Movie movie =  _context.Movies.Find(id);
+            MovieCommentViewModel vm = new MovieCommentViewModel();
+
             if (movie == null)
             {
                 return NotFound();
             }
+            vm.MoviesID = id.Value;
+            vm.Title = movie.Name;
+            var comments = _context.MovieComments.Where(d => d.MoviesID.Equals(id.Value)).ToList();
+            vm.ListOfComments = comments;
 
-            return View(movie);
+            var ratings = _context.MovieComments.Where(d => d.MoviesID.Equals(id.Value)).ToList();
+            if (ratings.Count() > 0 )
+            {
+                var ratingSum = ratings.Sum(d => d.Rating);
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+
+            return View(vm);
         }
 
         // GET: Movies/Create

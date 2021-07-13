@@ -18,5 +18,6 @@ namespace MovieService.Models
         public string Genres { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Thumbnail { get; set; }
+        public ICollection<MovieComment> MovieComments { get; set; }
     }
 }

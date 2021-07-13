@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieService.Data;
 
 namespace MovieService.Migrations
 {
     [DbContext(typeof(MovieServiceContext))]
-    partial class MovieServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20210713100031_MovieComment")]
+    partial class MovieComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
