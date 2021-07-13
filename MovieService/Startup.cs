@@ -31,8 +31,8 @@ namespace MovieService
             services.AddDbContext<MovieServiceContext>(options => options.UseSqlite(Configuration.GetConnectionString("MovieServiceContextConnection")));
             services.AddDefaultIdentity<MovieServiceUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<MovieServiceContext>()
-                .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<MovieServiceContext>();
+                //.AddDefaultTokenProviders();
             services.AddScoped<IWatchlistRepository, WatchlistRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -57,8 +57,8 @@ namespace MovieService
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();   
 
             app.UseEndpoints(endpoints =>
             {

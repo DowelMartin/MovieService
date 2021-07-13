@@ -2,9 +2,11 @@
 
 @using Microsoft.AspNetCore.Identity
 @using MovieService.Areas.Identity.Data
+@using MovieService.Repositories
 
 @inject SignInManager<MovieServiceUser> SignInManager
 @inject UserManager<MovieServiceUser> UserManager
+@inject IWatchlistRepository WatchlistRepository  
 
 @{
     ViewData["Title"] = "Details";
@@ -20,17 +22,20 @@
     </div>
     <div class="text-center">
 
+        <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@Model.ID">Comments</a>
+
         @if (SignInManager.IsSignedIn(User))
         {
-            <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@Model.ID">Comment</a>
 
-            <a class="btn btn-outline-success" asp-action="New" asp-controller="Watchlist" asp-route-movieID="@Model.ID">Add to Watchlist</a>
+            <a class="btn btn-outline-success
+               @(WatchlistRepository.CheckIfAlreadyExists(UserManager.GetUserId(User), @Model.ID)? "disabled" : "")"
+               asp-action="New" asp-controller="Watchlist" asp-route-movieID="@Model.ID">
+                @(WatchlistRepository.CheckIfAlreadyExists(UserManager.GetUserId(User), @Model.ID)? "Movie already in watchlist" : "Add to Watchlist")
+            </a>
         }
-
-        @if (SignInManager.IsSignedIn(User))
-        {
+        @if (User.IsInRole("Admin")) { 
             <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
-            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>
+        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>
         }
     </div>
     <hr />

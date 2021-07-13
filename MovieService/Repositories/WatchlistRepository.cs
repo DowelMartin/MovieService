@@ -15,6 +15,12 @@ namespace MovieService.Repositories
         {
             _context = context;
         }
+
+        public bool CheckIfAlreadyExists(string userID, int movieID)
+        {
+            return _context.Watchlists.Any(w => w.UserID.Equals(userID) && w.MovieID == movieID);
+        }
+
         public void Create(Watchlist watchlist)
         {
             _context.Watchlists.Add(watchlist);

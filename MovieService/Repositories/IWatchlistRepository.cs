@@ -12,6 +12,7 @@ namespace MovieService.Repositories
         void Create(Watchlist watchlist);
         List<Watchlist> GetUserWatchlist(string userID);
         void Remove(Watchlist watchlist);
+        bool CheckIfAlreadyExists(string userID, int movieID);
 
     }
 }

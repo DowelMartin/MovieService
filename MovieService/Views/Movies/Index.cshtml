@@ -13,8 +13,8 @@
 
 <h1 class="text-center">Movies</h1>
 
-@if (SignInManager.IsSignedIn(User)) 
-{ 
+@if (User.IsInRole("Admin"))
+{
     <p>
         <a class="btn btn-outline-warning btn-lg btn-block" asp-action="Create">Add movie</a>
     </p>

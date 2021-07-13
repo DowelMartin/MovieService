@@ -1,5 +1,11 @@
 ﻿@model MovieService.ViewModels.MovieCommentViewModel
 
+@using Microsoft.AspNetCore.Identity
+@using MovieService.Areas.Identity.Data
+
+@inject SignInManager<MovieServiceUser> SignInManager
+@inject UserManager<MovieServiceUser> UserManager
+
 @{
     ViewData["Title"] = "Comment";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,8 +47,10 @@
     </div>
 }
 <hr />
-<partial name="_CommentBox" />
-
+@if (SignInManager.IsSignedIn(User))
+{
+    <partial name="_CommentBox" />
+}
 <script>
     function SCRate() {
         for (var i = 1; i <= @totalRating; i++) {
@@ -55,5 +63,5 @@
 </script>
 
 <div>
-        <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
 </div>
