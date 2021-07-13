@@ -15,25 +15,26 @@
 <div>
     <h4>Movie</h4>
     <hr />
+    <div class="text-center" style="margin-bottom: 10px;">
+        <a class="btn btn-outline-danger btn-lg btn-block" asp-action="Index">Back to List</a>
+    </div>
     <div class="text-center">
 
         @if (SignInManager.IsSignedIn(User))
         {
-            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
-        }
-
-        @if (SignInManager.IsSignedIn(User)) 
-        { 
             <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@Model.ID">Comment</a>
+
+            <a class="btn btn-outline-success" asp-action="New" asp-controller="Watchlist" asp-route-movieID="@Model.ID">Add to Watchlist</a>
         }
 
         @if (SignInManager.IsSignedIn(User))
         {
+            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
             <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>
         }
     </div>
     <hr />
-    <div class="card mb-3" style="max-width: 1000px; margin-top: 10px;">
+    <div class="card mb-3" style="margin-top: 10px;">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="@Url.Content(Model.Thumbnail)" class="img-fluid rounded-start" alt="...">
@@ -43,28 +44,28 @@
                     <dl class="row">
                         <h1 style="margin-bottom: 30px;">@Html.DisplayFor(model => model.Name)</h1>
 
-                        <dt class="col-sm-4">
+                        <dt class="col-sm-3">
                             @Html.DisplayNameFor(model => model.ProductionCountries)
                         </dt>
-                        <dd class="col-sm-8">
+                        <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.ProductionCountries)
                         </dd>
-                        <dt class="col-sm-4">
+                        <dt class="col-sm-3">
                             @Html.DisplayNameFor(model => model.Genres)
                         </dt>
-                        <dd class="col-sm-8">
+                        <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.Genres)
                         </dd>
-                        <dt class="col-sm-4">
+                        <dt class="col-sm-3">
                             @Html.DisplayNameFor(model => model.ReleaseDate)
                         </dt>
-                        <dd class="col-sm-8">
+                        <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.ReleaseDate)
                         </dd>
-                        <dt class="col-sm-4">
+                        <dt class="col-sm-3">
                             @Html.DisplayNameFor(model => model.Description)
                         </dt>
-                        <dd class="col-sm-8">
+                        <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.Description)
                         </dd>
                     </dl>
@@ -73,16 +74,4 @@
         </div>
     </div>
 
-</div>
-<div>
-
-    
-    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
-    
-    
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <a asp-action="New" asp-controller="Watchlist" asp-route-movieID="@Model.ID">Add to Watchlist</a>
-    }
 </div>

@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<MovieService.Models.Movie>
 
+@using Microsoft.AspNetCore.Identity
+@using MovieService.Areas.Identity.Data
+
+@inject SignInManager<MovieServiceUser> SignInManager
+@inject UserManager<MovieServiceUser> UserManager
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,25 +13,28 @@
 
 <h1 class="text-center">Movies</h1>
 
+@if (SignInManager.IsSignedIn(User)) 
+{ 
     <p>
         <a class="btn btn-outline-warning btn-lg btn-block" asp-action="Create">Add movie</a>
     </p>
-
+}
 <hr />
 <div class="row">
-@foreach (var item in Model) {
-
-    
-    <div class="card" style="width: 18rem; margin-right: 10px; margin-top: 10px;">
-        <a asp-action="Details" asp-route-id="@item.ID" style="text-decoration: none; color: black;">
-            <img src="@Url.Content(item.Thumbnail)" class="card-img-top" height="367px">
-            <div class="card-body text-center">
-                <h4 class="link">@Html.DisplayFor(modelItem => item.Name)</h4>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
-            </div>
-        </a>
-    </div>
+    @foreach (var item in Model)
+    {
 
 
-}
+        <div class="card" style="width: 18rem; margin-right: 10px; margin-top: 10px;">
+            <a asp-action="Details" asp-route-id="@item.ID" style="text-decoration: none; color: black;">
+                <img src="@Url.Content(item.Thumbnail)" class="card-img-top" height="367px">
+                <div class="card-body text-center">
+                    <h4 class="link">@Html.DisplayFor(modelItem => item.Name)</h4>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
+                </div>
+            </a>
+        </div>
+
+
+    }
 </div>
