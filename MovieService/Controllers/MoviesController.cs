@@ -27,7 +27,24 @@ namespace MovieService.Controllers
         }
 
         // GET: Movies/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.Movies
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
+        }
+
+        public IActionResult Comment(int? id)
         {
             if (id == null)
             {

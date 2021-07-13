@@ -46,7 +46,7 @@ namespace MovieService.Controllers
             _context.MovieComments.Add(artComment);
             _context.SaveChanges();
 
-            return RedirectToAction("Details", "Movies", new { id = moviesID });
+            return RedirectToAction("Comment", "Movies", new { id = moviesID });
         }
 
         // GET: MovieComments/Details/5
