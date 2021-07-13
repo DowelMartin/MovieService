@@ -28,10 +28,23 @@
                 <input asp-for="ProductionCountries" class="form-control" />
                 <span asp-validation-for="ProductionCountries" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Genres" class="control-label"></label>
                 <input asp-for="Genres" class="form-control" />
                 <span asp-validation-for="Genres" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label for="cars">Genre:</label>
+                <select asp-for="Genres" id="cars">
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>
@@ -51,7 +64,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

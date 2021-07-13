@@ -7,9 +7,13 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*@if (User.IsInRole("Admin"))
+{*@
+    <p>
+        <a class="btn btn-outline-secondary" asp-action="Create">Add movie</a>
+    </p>
+@*}*@
+
 <table class="table">
     <thead>
         <tr>
@@ -56,10 +60,10 @@
                 @Html.DisplayFor(modelItem => item.Thumbnail)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-                <a asp-action="Comment" asp-route-id="@item.ID">Comment</a>
+                <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                <a class="btn btn-outline-warning" asp-action="Comment" asp-route-id="@item.ID">Comment</a>
             </td>
         </tr>
 }
