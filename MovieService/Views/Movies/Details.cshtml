@@ -74,3 +74,15 @@
     </div>
 
 </div>
+<div>
+
+    
+    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
+    
+    
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-action="New" asp-controller="Watchlist" asp-route-movieID="@Model.ID">Add to Watchlist</a>
+    }
+</div>

@@ -19,5 +19,6 @@ namespace MovieService.Models
         public DateTime ReleaseDate { get; set; }
         public string Thumbnail { get; set; }
         public ICollection<MovieComment> MovieComments { get; set; }
+        public List<Watchlist> Watchlists { get; set; }
     }
 }

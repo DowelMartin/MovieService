@@ -266,6 +266,31 @@ namespace MovieService.Migrations
                     b.ToTable("MovieComments");
                 });
 
+            modelBuilder.Entity("MovieService.Models.Watchlist", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MovieID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MovieID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Watchlists");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -328,9 +353,35 @@ namespace MovieService.Migrations
                     b.Navigation("Movies");
                 });
 
+            modelBuilder.Entity("MovieService.Models.Watchlist", b =>
+                {
+                    b.HasOne("MovieService.Models.Movie", "Movie")
+                        .WithMany("Watchlists")
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieService.Areas.Identity.Data.MovieServiceUser", "User")
+                        .WithMany("Watchlists")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MovieService.Areas.Identity.Data.MovieServiceUser", b =>
+                {
+                    b.Navigation("Watchlists");
+                });
+
             modelBuilder.Entity("MovieService.Models.Movie", b =>
                 {
                     b.Navigation("MovieComments");
+
+                    b.Navigation("Watchlists");
                 });
 #pragma warning restore 612, 618
         }
